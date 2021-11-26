@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fox.common.elasticsearch.config.RestHighLevelClientConfig,\
+  com.fox.common.elasticsearch.service.ElasticSearchService
