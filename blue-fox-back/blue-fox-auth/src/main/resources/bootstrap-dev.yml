@@ -1,0 +1,18 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: blue-fox-auth
+  cloud:
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: 43.226.152.184:8848
+      # 配置中心
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        shared-configs[0]:
+          data-id: blue-fox-common.yaml
+          refresh: true
