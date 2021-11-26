@@ -1,0 +1,19 @@
+server:
+  port: 8800
+
+spring:
+  application:
+    name: blue-fox-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 43.226.152.184:8848
+        namespace: prod_namespace_id
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        namespace: prod_namespace_id
+        shared-configs[0]:
+          data-id: blue-fox-common.yaml
+          refresh: true
+
