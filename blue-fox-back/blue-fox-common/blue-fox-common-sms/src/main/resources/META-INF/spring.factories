@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fox.common.sms.config.AliyunSmsProperties,\
+  com.fox.common.sms.service.AliyunSmsService
