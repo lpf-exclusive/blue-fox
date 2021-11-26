@@ -1,0 +1,16 @@
+package com.fox.pms.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fox.pms.pojo.entity.PmsSpu;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:xianrui0365@163.com">xianrui</a>
+ */
+@Mapper
+public interface PmsSpuMapper extends BaseMapper<PmsSpu> {
+    List<PmsSpu> list(Page<PmsSpu> page, String name, Long categoryId);
+}

@@ -1,0 +1,19 @@
+server:
+  port: 8802
+
+spring:
+  application:
+    name: blue-fox-pms
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 43.226.152.184:8848
+        namespace: prod_namespace_id
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        namespace: prod_namespace_id
+        # 公共配置
+        shared-configs[0]:
+          data-id: blue-fox-common.yaml
+          refresh: true

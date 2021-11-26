@@ -1,0 +1,51 @@
+package com.fox.pms.controller.admin;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.fox.common.result.Result;
+import com.fox.pms.pojo.dto.admin.AttributeFormDTO;
+import com.fox.pms.pojo.entity.PmsAttribute;
+import com.fox.pms.service.IPmsAttributeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:xianrui0365@163.com">xianrui</a>
+ */
+@Api(tags = "系统管理端-属性信息")
+@RestController
+@RequestMapping("/api/v1/attributes")
+@Slf4j
+@AllArgsConstructor
+public class AttributeController {
+
+    private IPmsAttributeService iPmsAttributeService;
+
+    @ApiOperation(value = "属性列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "categoryId", value = "分类ID", paramType = "query", dataType = "Long"),
+            @ApiImplicitParam(name = "type", value = "属性类型（1：规格；2：属性）", paramType = "query", dataType = "Integer"),
+    })
+    @GetMapping
+    public Result list(Long categoryId, Integer type) {
+        List<PmsAttribute> list = iPmsAttributeService.list(new LambdaQueryWrapper<PmsAttribute>()
+                .eq(categoryId != null, PmsAttribute::getCategoryId, categoryId)
+                .eq(type != null, PmsAttribute::getType, type)
+        );
+        return Result.success(list);
+    }
+
+    @ApiOperation(value = "批量新增/修改")
+    @ApiImplicitParam(name = "attributeForm", value = "实体JSON对象", required = true, paramType = "body", dataType = "AttributeFormDTO")
+    @PostMapping("/batch")
+    public Result saveBatch(@RequestBody AttributeFormDTO attributeForm) {
+        boolean result = iPmsAttributeService.saveBatch(attributeForm);
+        return Result.judge(result);
+    }
+}
