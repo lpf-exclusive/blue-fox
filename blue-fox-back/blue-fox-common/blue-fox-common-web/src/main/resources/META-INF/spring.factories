@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fox.common.web.config.WebMvcConfig,\
+  com.fox.common.web.config.FeignConfig,\
+  com.fox.common.web.exception.GlobalExceptionHandler
